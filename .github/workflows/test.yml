@@ -54,4 +54,4 @@ jobs:
       - name: Install Dependencies
         run: poetry install
       - name: Run test
-        run: poetry run pytest --cov -n auto test
+        run: poetry run pytest --cov=src -n auto test/unit
