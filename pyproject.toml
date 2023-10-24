@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "python-code-quality-and-style-example"
+version = "0.1.0"
+description = ""
+authors = ["nesquivelr <n.esquivelrivera@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.10.0"
+ruff = "^0.1.1"
+mypy = "^1.6.1"
+vulture = "^2.10"
+safety = "^2.3.5"
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+pytest-xdist = "^3.3.1"
+pre-commit = "^3.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

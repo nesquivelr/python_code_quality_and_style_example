@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 23.10.0
+    hooks:
+    - id: black
+      language_version: python3.12
+      always_run: true
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.1
+    hooks:
+    - id: ruff
+      always_run: true
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.6.1
+    hooks:
+    - id: mypy
+      always_run: true
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: v2.10
+    hooks:
+    - id: vulture
+      pass_filenames: true
+      always_run: true
+  - repo: local
+    hooks:
+    - id: pytest
+      name: pytest
+      entry: sh ./scripts/test.sh
+      language: system
+      pass_filenames: false
+      always_run: true

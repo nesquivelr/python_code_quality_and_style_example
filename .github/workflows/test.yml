@@ -1,0 +1,61 @@
+name: test
+
+run-name: ${{ github.actor }} is learning GitHub Actions
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+          architecture: "x64"
+          cache: "poetry"
+      - name: Install Dependencies
+        run: poetry install
+      - name: Run black
+        run: poetry run black src test --check
+      - name: Run mypy
+        run: poetry run mypy src test
+      - name: Run ruff
+        run: poetry run ruff src test
+      - name: Run vulture
+        run: poetry run vulture src test
+      - name: Run safety
+        run: poetry run safety check
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+          architecture: "x64"
+          cache: "poetry"
+      - name: Install Dependencies
+        run: poetry install
+      - name: Run test
+        run: sh scripts/test.sh
