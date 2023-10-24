@@ -30,11 +30,11 @@ jobs:
       - name: Install Dependencies
         run: poetry install
       - name: Run black
-        run: black src test --check
+        run: poetry run black src test --check
       - name: Run mypy
-        run: mypy src test
+        run: poetry run mypy src test
       - name: Run ruff
-        run: ruff src test
+        run: poetry run ruff src test
   test:
     runs-on: ubuntu-latest
     steps:
@@ -54,4 +54,4 @@ jobs:
       - name: Install Dependencies
         run: poetry install
       - name: Run test
-        run: pytest --cov -n auto test
+        run: poetry run pytest --cov -n auto test
